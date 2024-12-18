@@ -1,0 +1,5 @@
+Package: classa
+Version: 0.1
+Architecture: all
+Maintainer: sanyatik@gmail.com
+Description:This software calculates the sum of the first 'n' terms of the series 1 + x + x^2 

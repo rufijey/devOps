@@ -239,7 +239,7 @@ CXX = g++
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2
 CYGPATH_W = echo
-DEFS = -DPACKAGE_NAME=\"classa\" -DPACKAGE_TARNAME=\"classa\" -DPACKAGE_VERSION=\"0,1\" -DPACKAGE_STRING=\"classa\ 0,1\" -DPACKAGE_BUGREPORT=\"sanyatik@gmail.com\" -DPACKAGE_URL=\"\" -DPACKAGE=\"classa\" -DVERSION=\"0,1\"
+DEFS = -DPACKAGE_NAME=\"classa\" -DPACKAGE_TARNAME=\"classa\" -DPACKAGE_VERSION=\"0.1\" -DPACKAGE_STRING=\"classa\ 0.1\" -DPACKAGE_BUGREPORT=\"sanyatik@gmail.com\" -DPACKAGE_URL=\"\" -DPACKAGE=\"classa\" -DVERSION=\"0.1\"
 DEPDIR = .deps
 ECHO_C = 
 ECHO_N = -n
@@ -261,15 +261,15 @@ OBJEXT = o
 PACKAGE = classa
 PACKAGE_BUGREPORT = sanyatik@gmail.com
 PACKAGE_NAME = classa
-PACKAGE_STRING = classa 0,1
+PACKAGE_STRING = classa 0.1
 PACKAGE_TARNAME = classa
 PACKAGE_URL = 
-PACKAGE_VERSION = 0,1
+PACKAGE_VERSION = 0.1
 PATH_SEPARATOR = :
 SET_MAKE = 
 SHELL = /bin/bash
 STRIP = 
-VERSION = 0,1
+VERSION = 0.1
 abs_builddir = /home/sanya/devOps
 abs_srcdir = /home/sanya/devOps
 abs_top_builddir = /home/sanya/devOps
@@ -317,6 +317,8 @@ AUTOMAKE_OPTIONS = foreign
 classa_SOURCES = main.cpp ClassA.cpp ClassA.h
 dist_man_MANS = classa.1
 dist_pkgdata_DATA = data.txt
+CTRLF_DIR = $(CURDIR)/deb/DEBIAN
+CTRLF_NAME = $(CTRLF_DIR)/control
 all: all-am
 
 .SUFFIXES:
@@ -861,6 +863,21 @@ uninstall-man: uninstall-man1
 
 .PRECIOUS: Makefile
 
+
+.PHONY: deb dubug
+
+deb:
+	mkdir -p $(CTRLF_DIR)
+	echo Package: $(PACKAGE) > $(CTRLF_NAME)
+	echo Version: $(VERSION) >> $(CTRLF_NAME)
+	echo Architecture: all >> $(CTRLF_NAME)
+	echo Maintainer: $(PACKAGE_BUGREPORT) >> $(CTRLF_NAME)
+	echo -n "Description:" >> $(CTRLF_NAME)
+	cat classa.1 >> $(CTRLF_NAME)
+	make DESTDIR=$(CURDIR)/deb install
+
+debug:
+	$(foreach v, $(.VARIABLES), $(info $(v)=$($(v))))
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
