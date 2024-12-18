@@ -3,7 +3,7 @@
 
 class ClassA {
 public:
-	double FuncA(double x);
+	double FuncA(int n, double x);
 };
 
 #endif
