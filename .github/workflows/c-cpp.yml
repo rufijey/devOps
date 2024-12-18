@@ -1,24 +1,35 @@
-name: C/C++ CI
+name: C/C++ CI - Build Tarball
 
 on:
   push:
-    branches: [ "branchMake" ]
-  pull_request:
-    branches: [ "branchMake" ]
+    branches:
+      - branchAutomake
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: ./configure
-      run: ./configure
-    
-    - name: make
-      run: make
-      
-    - name: run-classa
-      run: ./classa.elf
+      - name: Install Build Tools
+        run: sudo apt-get update && sudo apt-get install -y automake autoconf libtool g++
+
+      - name: Generate Build Scripts
+        run: |
+          aclocal
+          autoconf
+          automake --add-missing
+
+      - name: Configure and Build
+        run: ./configure && make
+
+      - name: Create Tarball
+        run: make dist
+
+      - name: Upload Tarball
+        uses: actions/upload-artifact@v2
+        with:
+          name: classa-tarball
+          path: classa-*.tar.gz
