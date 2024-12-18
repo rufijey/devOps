@@ -3,7 +3,7 @@
 
 class ClassA {
 public:
-	double FuncA();
+	double FuncA(double x);
 };
 
 #endif

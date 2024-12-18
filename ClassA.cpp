@@ -1,5 +1,5 @@
 #include "ClassA.h"
 
-double ClassA::FuncA() {
-	return 0;
+double ClassA::FuncA(double x) {
+	return 1 + x + x * x;
 }
