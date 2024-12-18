@@ -3,6 +3,6 @@
 
 int main() {
 	ClassA classA;
-	std::cout << "FuncA result: " << classA.FuncA() << std::endl;
+	std::cout << "FuncA result: " << classA.FuncA(4, 3.0) << std::endl;
 	return 0;
 }
