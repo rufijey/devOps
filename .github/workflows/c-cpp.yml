@@ -1,9 +1,9 @@
-name: C/C++ CI
+name: C/C++ CI - Build Debian Package
 
 on:
   push:
     branches:
-      - branchAutomake
+      - branchAutoPackage
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Build Tools
-        run: sudo apt-get update && sudo apt-get install -y automake autoconf libtool g++
+        run: sudo apt-get update && sudo apt-get install -y build-essential devscripts
 
       - name: Generate Build Scripts
         run: |
@@ -25,11 +25,11 @@ jobs:
       - name: Configure and Build
         run: ./configure && make
 
-      - name: Create Tarball
-        run: make dist
+      - name: Build Debian Package
+        run: dpkg-deb --build deb
 
-      - name: Upload Tarball
+      - name: Upload Debian Package
         uses: actions/upload-artifact@v4
         with:
-          name: classa-tarball
-          path: classa-*.tar.gz
+          name: deb
+          path: deb
