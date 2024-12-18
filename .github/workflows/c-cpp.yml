@@ -23,4 +23,4 @@ jobs:
         run: ./configure && make
 
       - name: Run Tests
-        run: ./tests/make check
+        run: cd tests && make check
