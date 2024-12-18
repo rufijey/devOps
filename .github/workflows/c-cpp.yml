@@ -3,7 +3,7 @@ name: C/C++ CI
 on:
   push:
     branches:
-      - branchAutomake
+      - branchAutoTest
 
 jobs:
   build:
@@ -12,9 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Install Build Tools
-        run: sudo apt-get update && sudo apt-get install -y automake autoconf libtool g++
 
       - name: Generate Build Scripts
         run: |
@@ -25,11 +22,5 @@ jobs:
       - name: Configure and Build
         run: ./configure && make
 
-      - name: Create Tarball
-        run: make dist
-
-      - name: Upload Tarball
-        uses: actions/upload-artifact@v4
-        with:
-          name: classa-tarball
-          path: classa-*.tar.gz
+      - name: Run Tests
+        run: ./tests/make check
