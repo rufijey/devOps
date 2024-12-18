@@ -4,6 +4,8 @@ classa_SOURCES = main.cpp ClassA.cpp ClassA.h
 dist_man_MANS = classa.1
 dist_pkgdata_DATA = data.txt
 
+SUBDIR = tests
+
 CTRLF_DIR=$(CURDIR)/deb/DEBIAN
 CTRLF_NAME=$(CTRLF_DIR)/control
 
