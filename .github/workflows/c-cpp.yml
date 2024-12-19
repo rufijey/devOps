@@ -2,8 +2,9 @@ name: C/C++ CI
 
 on:
   push:
-    branches:
-      - branchAutomake
+    branches: ["*"]
+  pull_request:
+    branches: ["*"]
 
 jobs:
   build:
@@ -13,23 +14,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Build Tools
-        run: sudo apt-get update && sudo apt-get install -y automake autoconf libtool g++
+      - name: ./configure
+        run: ./configure
 
-      - name: Generate Build Scripts
-        run: |
-          aclocal
-          autoconf
-          automake --add-missing
+      - name: Make
+        run: make
 
-      - name: Configure and Build
-        run: ./configure && make
+      - name: Run check
+        run: make check
 
-      - name: Create Tarball
-        run: make dist
+      - name: Run distcheck
+        run: make distcheck
 
-      - name: Upload Tarball
-        uses: actions/upload-artifact@v4
-        with:
-          name: classa-tarball
-          path: classa-*.tar.gz
+      - name: Log in to DockerHub
+        run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ vars.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build Dockerfile image
+        run: docker build --platform=linux/amd64 -t alekstikhonov/classaserver --push .
