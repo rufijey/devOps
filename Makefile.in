@@ -986,6 +986,7 @@ uninstall-man: uninstall-man1
 
 .PRECIOUS: Makefile
 
+classa_LDFLAGS -static
 
 .PHONY: deb dubug
 
