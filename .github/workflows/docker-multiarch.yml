@@ -31,11 +31,11 @@ jobs:
         with:
           context: .
           push: true
-          tags: alekstikhonov/classaserver:latest
+          tags: alekstikhonov/classaserver-multi-architecture:latest
           platforms: linux/amd64,linux/arm64
           provenance: false
 
       - name: Create and Push Multi-Arch Manifest
         run: |
-          docker buildx imagetools create -t alekstikhonov/classaserver:latest \
-          alekstikhonov/classaserver:latest
+          docker buildx imagetools create -t alekstikhonov/classaserver-multi-architecture:latest \
+          alekstikhonov/classaserver-multi-architecture:latest
