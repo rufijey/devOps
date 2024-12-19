@@ -107,6 +107,8 @@ am_classa_OBJECTS = main.$(OBJEXT) ClassA.$(OBJEXT) \
 	HTTP_Server.$(OBJEXT)
 classa_OBJECTS = $(am_classa_OBJECTS)
 classa_LDADD = $(LDADD)
+classa_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(classa_LDFLAGS) \
+	$(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -358,6 +360,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign
 classa_SOURCES = main.cpp ClassA.cpp ClassA.h HTTP_Server.cpp
+classa_LDFLAGS = -static
 dist_man_MANS = classa.1
 dist_pkgdata_DATA = data.txt
 SUBDIRS = tests
@@ -445,7 +448,7 @@ clean-binPROGRAMS:
 
 classa$(EXEEXT): $(classa_OBJECTS) $(classa_DEPENDENCIES) $(EXTRA_classa_DEPENDENCIES) 
 	@rm -f classa$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(classa_OBJECTS) $(classa_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(classa_LINK) $(classa_OBJECTS) $(classa_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -986,7 +989,6 @@ uninstall-man: uninstall-man1
 
 .PRECIOUS: Makefile
 
-classa_LDFLAGS -static
 
 .PHONY: deb dubug
 

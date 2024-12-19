@@ -5,7 +5,7 @@ RUN apk add --no-cache build-base automake autoconf git
 WORKDIR /home/classaimage
 RUN git clone --branch branchHTTPservMulti https://github.com/rufijey/devOps.git .
 
-RUN autoreconf -fi
+RUN autoreconf -i
 RUN ./configure
 RUN make
 
