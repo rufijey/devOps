@@ -1,10 +1,10 @@
 AUTOMAKE_OPTIONS = foreign
 bin_PROGRAMS = classa
-classa_SOURCES = main.cpp ClassA.cpp ClassA.h
+classa_SOURCES = main.cpp ClassA.cpp ClassA.h HTTP_Server.cpp
 dist_man_MANS = classa.1
 dist_pkgdata_DATA = data.txt
 
-SUBDIR = tests
+SUBDIRS = tests
 
 CTRLF_DIR=$(CURDIR)/deb/DEBIAN
 CTRLF_NAME=$(CTRLF_DIR)/control

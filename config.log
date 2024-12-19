@@ -169,6 +169,7 @@ config.status:1019: cd .       && sed -e '/# am--include-marker/d' Makefile     
 make: Nothing to be done for 'am--depfiles'.
 config.status:1024: $? = 0
 config.status:1019: cd tests       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:1024: $? = 0
 
 ## ---------------- ##
