@@ -7,6 +7,7 @@ dist_pkgdata_DATA = data.txt
 
 SUBDIRS = tests
 
+
 CTRLF_DIR=$(CURDIR)/deb/DEBIAN
 CTRLF_NAME=$(CTRLF_DIR)/control
 
